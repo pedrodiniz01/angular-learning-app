@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "Rui", "age": 30, "job": "Engineer" },
+    { "id": 2, "name": "Tiago", "age": 25, "job": "Programmer" },
+    { "id": 3, "name": "Henrique", "age": 35, "job": "Driver" },
+    { "id": 4, "name": "Ana", "age": 28, "job": "Doctor" }
+  ]
+  

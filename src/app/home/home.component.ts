@@ -1,31 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { TableComponent } from "../table/table.component";
-import usersMock from '../mocks/users-mock.json';
-import User from '../models/user.interface';
+import { Component } from '@angular/core';
+import { UserComponent } from "../user/user.component";
+import { NavbarComponent } from "../navbar/navbar.component";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
-  imports: [TableComponent],
+  imports: [UserComponent, NavbarComponent, MatIconModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  tableDataParent: User[] = usersMock;
-  columnDataParent: string[] = []; 
-
-
-  ngOnInit(): void {
-    this.populateColumnNames();
-  }
-
-  populateColumnNames() : void {
-    if (this.tableDataParent.length) {
-      this.columnDataParent = Object.keys(this.tableDataParent[0]);
-    }
-  }
-
-  receivedFromChild(message: string) {
-    console.log(message)
-  }
 }

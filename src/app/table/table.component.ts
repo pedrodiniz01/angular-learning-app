@@ -1,4 +1,4 @@
-import { Component, input, Input, Output, output } from '@angular/core';
+import { Component, input, Input, OnInit, Output, output } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card'; 
 import { CommonModule } from '@angular/common'; 
@@ -9,15 +9,47 @@ import { CommonModule } from '@angular/common';
   styleUrl: './table.component.scss'
 })
 
-export class TableComponent {
+export class TableComponent implements OnInit {
+
 
   tableTitle = input<string>('');
   tableData = input<any[]>([]);
-  columnData = input<any[]>([]);
-  message = output<string>();
+  pageSize = input<number>(5);
+  columnData: string[] = []; 
+  currentPage = 0;
+  presentedData: any[] = [];
 
-  communicateToParent() {
-    this.message.emit('New message.');
+  ngOnInit(): void {
+    this.populateColumnNames();
+    this.showUpdatedData();
   }
 
+  populateColumnNames() : void {
+  const data = this.tableData(); 
+  if (data.length) {
+    this.columnData = Object.keys(data[0]);
+    }
+  }
+
+  showUpdatedData() {
+    const data = this.tableData();
+    const start = this.currentPage * this.pageSize();
+    const end = start + this.pageSize();
+    this.presentedData = data.slice(start, end);
+  }
+
+  nextPage(): void {
+    const data = this.tableData();
+    if ((this.currentPage + 1) * this.pageSize() < data.length) {
+      this.currentPage++;
+      this.showUpdatedData();
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.showUpdatedData();
+    }
+  }
 }

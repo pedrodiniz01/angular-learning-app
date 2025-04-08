@@ -1,14 +1,31 @@
-import { Component } from '@angular/core';
-import { CounterButtonComponent } from "../counter-button/counter-button.component";
-import { UserDataComponent } from "../user-data/user-data.component";
+import { Component, OnInit } from '@angular/core';
+import { TableComponent } from "../table/table.component";
+import usersMock from '../mocks/users-mock.json';
+import User from '../models/user.interface';
 
 @Component({
   selector: 'app-home',
-  imports: [CounterButtonComponent, UserDataComponent],
+  imports: [TableComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-   name : string = 'Pedro';
-   age : number = 25;  
+export class HomeComponent implements OnInit {
+
+  tableDataParent: User[] = usersMock;
+  columnDataParent: string[] = []; 
+
+
+  ngOnInit(): void {
+    this.populateColumnNames();
+  }
+
+  populateColumnNames() : void {
+    if (this.tableDataParent.length) {
+      this.columnDataParent = Object.keys(this.tableDataParent[0]);
+    }
+  }
+
+  receivedFromChild(message: string) {
+    console.log(message)
+  }
 }

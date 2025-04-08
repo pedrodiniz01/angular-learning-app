@@ -1,5 +1,6 @@
-<h1>Informação do User</h1>
-<p>Name: {{name}}</p>
-<p>Age: {{age}}</p>
-<app-counter-button/>
-<app-user-data> </app-user-data>
+<app-table 
+[columnData]="columnDataParent"
+[tableData]="tableDataParent"
+[tableTitle]="'Users Table'"
+(message)="receivedFromChild($event)"
+></app-table>

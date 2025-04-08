@@ -11,10 +11,11 @@ import { CommonModule } from '@angular/common';
 
 export class TableComponent implements OnInit {
 
-
   tableTitle = input<string>('');
   tableData = input<any[]>([]);
+  paginationEnabled= input<boolean>();
   pageSize = input<number>(5);
+  
   columnData: string[] = []; 
   currentPage = 0;
   presentedData: any[] = [];

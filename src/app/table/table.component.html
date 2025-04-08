@@ -11,8 +11,12 @@
             <tr mat-row *matRowDef="let row; columns: columnData;"></tr>
         </table>
     </mat-card>
-    <div class="pagination-buttons">
-        <button (click)="previousPage()" [disabled]="currentPage === 0">Previous Page</button>
-        <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize() >= tableData().length">Next Page</button>
+    <div class="pagination-buttons" *ngIf="paginationEnabled()">
+        <button (click)="previousPage()" [disabled]="currentPage === 0">
+          Previous Page
+        </button>
+        <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize() >= tableData().length">
+          Next Page
+        </button>
       </div>
 </div>

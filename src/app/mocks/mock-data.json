@@ -3,15 +3,15 @@
     { "id": 2, "name": "Tiago", "age": 25, "job": "Programmer" },
     { "id": 3, "name": "Henrique", "age": 35, "job": "Driver" },
     { "id": 4, "name": "Ana", "age": 28, "job": "Doctor" },
-    { "id": 5, "name": "Maria", "age": 32, "job": "Designer" },
-    { "id": 6, "name": "João", "age": 41, "job": "Manager" },
+    { "id": 5, "name": "Maria", "age": 32, "job": "Mechanic" },
+    { "id": 6, "name": "João", "age": 41, "job": "Doctor" },
     { "id": 7, "name": "Beatriz", "age": 26, "job": "Architect" },
     { "id": 8, "name": "Carlos", "age": 38, "job": "Mechanic" },
-    { "id": 9, "name": "Sofia", "age": 29, "job": "Nurse" },
-    { "id": 10, "name": "Miguel", "age": 33, "job": "Consultant" },
+    { "id": 9, "name": "Sofia", "age": 29, "job": "Programmer" },
+    { "id": 10, "name": "Miguel", "age": 33, "job": "Mechanic" },
     { "id": 11, "name": "Laura", "age": 24, "job": "Teacher" },
     { "id": 12, "name": "Pedro", "age": 36, "job": "Data Analyst" },
     { "id": 13, "name": "Inês", "age": 27, "job": "Pharmacist" },
-    { "id": 14, "name": "Ricardo", "age": 40, "job": "Plumber" },
-    { "id": 15, "name": "Diana", "age": 31, "job": "Psychologist" }
+    { "id": 14, "name": "Ricardo", "age": 40, "job": "Doctor" },
+    { "id": 15, "name": "Diana", "age": 31, "job": "Programmer" }
 ]

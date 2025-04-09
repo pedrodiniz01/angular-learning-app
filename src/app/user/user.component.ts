@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import mockData from '../mocks/mock-data.json';
+import userData from '../mocks/users-data.json';
 import User from '../models/user.interface';
 import { TableComponent } from "../table/table.component";
 
@@ -11,6 +11,6 @@ import { TableComponent } from "../table/table.component";
 })
 export class UserComponent {
 
-  userData: User[] = mockData;
+  userData: User[] = userData;
 
 }

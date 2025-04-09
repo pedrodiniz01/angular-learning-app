@@ -25,14 +25,14 @@ export class TableComponent implements OnInit {
     this.showUpdatedData();
   }
 
-  populateColumnNames() : void {
+  private populateColumnNames() : void {
   const data = this.tableData(); 
   if (data.length) {
     this.columnData = Object.keys(data[0]);
     }
   }
 
-  showUpdatedData() {
+  private showUpdatedData() {
     const data = this.tableData();
     const start = this.currentPage * this.pageSize();
     const end = start + this.pageSize();

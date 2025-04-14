@@ -4,8 +4,11 @@
         <table mat-table [dataSource]="presentedData" class="mat-elevation-z8">
             <ng-container *ngFor="let column of columnData" [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef> {{ column | titlecase }} </th>
-            <td mat-cell *matCellDef="let user"> {{ user[column] }} </td>
+            <td mat-cell *matCellDef="let item"> {{ item[column] }} </td>
+
             </ng-container>
+
+            
         
             <tr mat-header-row *matHeaderRowDef="columnData"></tr>
             <tr mat-row *matRowDef="let row; columns: columnData;"></tr>
@@ -15,8 +18,9 @@
         <button (click)="previousPage()" [disabled]="currentPage === 0">
           Previous Page
         </button>
-        <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize() >= tableData().length">
+        <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize() >= fullData.length">
           Next Page
         </button>
       </div>
 </div>
+

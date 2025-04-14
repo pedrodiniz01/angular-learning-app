@@ -1,9 +1,8 @@
-<app-search 
-[data]=originalJobsData > 
-</app-search>
 
 <app-table 
 [tableTitle]="'Jobs Table'"
 [paginationEnabled]="false"
 [pageSize]="20"
+(selectedId)="selectedIdTrigger($event)"
 ></app-table>
+

@@ -1,7 +1,9 @@
-import { Component, input, Input, OnInit, Output, output } from '@angular/core';
+import { Component, input, Input, OnInit, Output, output, SimpleChanges } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card'; 
 import { CommonModule } from '@angular/common'; 
+import { SearchSharedDataServiceService } from '../services/search-shared-data-service.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-table',
   imports: [MatTableModule, MatCardModule, CommonModule],
@@ -9,39 +11,45 @@ import { CommonModule } from '@angular/common';
   styleUrl: './table.component.scss'
 })
 
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit{
 
   tableTitle = input<string>('');
-  tableData = input<any[]>([]);
-  paginationEnabled= input<boolean>();
+  paginationEnabled = input<boolean>();
   pageSize = input<number>(5);
-  
+  selectedId = output<number>();
+
   columnData: string[] = []; 
   currentPage = 0;
   presentedData: any[] = [];
+  fullData: any[] = [];
+
+  private subscription!: Subscription;
+
+  constructor(private searchSharedDataServiceService: SearchSharedDataServiceService) {}
 
   ngOnInit(): void {
-    this.populateColumnNames();
-    this.showUpdatedData();
+    this.subscription = this.searchSharedDataServiceService.filteredData$.subscribe(data => {
+      this.fullData = data;
+      this.populateColumnNames();
+      this.currentPage = 0;
+      this.showUpdatedData();
+    });
   }
 
-  private populateColumnNames() : void {
-  const data = this.tableData(); 
-  if (data.length) {
-    this.columnData = Object.keys(data[0]);
+  private populateColumnNames(): void {
+    if (this.fullData.length > 0) {
+      this.columnData = Object.keys(this.fullData[0]);
     }
   }
 
-  private showUpdatedData() {
-    const data = this.tableData();
+  private showUpdatedData(): void {
     const start = this.currentPage * this.pageSize();
     const end = start + this.pageSize();
-    this.presentedData = data.slice(start, end);
+    this.presentedData = this.fullData.slice(start, end);
   }
 
   nextPage(): void {
-    const data = this.tableData();
-    if ((this.currentPage + 1) * this.pageSize() < data.length) {
+    if ((this.currentPage + 1) * this.pageSize() < this.fullData.length) {
       this.currentPage++;
       this.showUpdatedData();
     }
@@ -52,5 +60,13 @@ export class TableComponent implements OnInit {
       this.currentPage--;
       this.showUpdatedData();
     }
+  }
+
+  onClick(value: number): void {
+    this.selectedId.emit(value);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }

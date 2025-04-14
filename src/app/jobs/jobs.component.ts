@@ -10,12 +10,8 @@ import { SearchComponent } from "../search/search.component";
   templateUrl: './jobs.component.html',
   styleUrl: './jobs.component.scss'
 })
-export class JobsComponent {
+export class JobsComponent{
 
-  originalJobsData: Job[] = jobsData;
   jobsData: Job[] = jobsData;
 
-  onFilteredJobs(filtered: Record<string, any>[]): void {
-      this.jobsData = filtered as Job[];
-    }
-  }
+}

@@ -23,12 +23,10 @@ export class TableComponent implements OnInit{
   presentedData: any[] = [];
   fullData: any[] = [];
 
-  private subscription!: Subscription;
-
   constructor(private searchSharedDataServiceService: SearchSharedDataServiceService) {}
 
   ngOnInit(): void {
-    this.subscription = this.searchSharedDataServiceService.filteredData$.subscribe(data => {
+      this.searchSharedDataServiceService.filteredData$.subscribe(data => {
       this.fullData = data;
       this.populateColumnNames();
       this.currentPage = 0;
@@ -60,13 +58,5 @@ export class TableComponent implements OnInit{
       this.currentPage--;
       this.showUpdatedData();
     }
-  }
-
-  onClick(value: number): void {
-    this.selectedId.emit(value);
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
   }
 }

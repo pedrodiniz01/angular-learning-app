@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import jobsData from '../mocks/jobs-data.json';
 import { TableComponent } from "../table/table.component";
 import Job from '../models/job.interface';
 import { SearchComponent } from "../search/search.component";
+import { JobService } from '../services/http/job.service';
 
 @Component({
   selector: 'app-jobs',
@@ -12,6 +12,17 @@ import { SearchComponent } from "../search/search.component";
 })
 export class JobsComponent{
 
-  jobsData: Job[] = jobsData;
+  jobsData: Job[] = [];
 
+  constructor(private jobService: JobService) {}
+
+  ngOnInit(): void {
+    this.jobService.getJobs().subscribe({
+      next: data => {
+        this.jobsData = data; 
+        console.log(this.jobsData);
+      },
+      error: error => console.error('Erro no Observable:', error)
+    });
+  }
 }

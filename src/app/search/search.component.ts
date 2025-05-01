@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { SearchSharedDataServiceService } from '../services/search-shared-data-service.service';
+import { SearchSharedDataServiceService } from '../services/state/search-shared-data-service.service';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +21,7 @@ import { SearchSharedDataServiceService } from '../services/search-shared-data-s
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
    @Input() originalData: any[] = [];
 
   columns: string[] = [];
@@ -31,11 +31,17 @@ export class SearchComponent implements OnInit {
   constructor(private searchService: SearchSharedDataServiceService) {}
 
   ngOnInit(): void {
-    this.extractColumns();
     this.searchService.setFilteredData(this.originalData);
+    this.extractColumns();
+  }
+
+  ngOnChanges(): void{
+    this.searchService.setFilteredData(this.originalData);
+    this.extractColumns();
   }
 
   extractColumns(): void {
+    console.log(this.originalData);
     if (this.originalData.length > 0) {
       const allKeys = new Set<string>();
       this.originalData.forEach(entry => {

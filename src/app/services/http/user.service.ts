@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import User from '../../models/user.interface';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -16,7 +16,17 @@ export class UserService {
   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(this.url+this.path);
   }
-  getUserById(id: number): Observable<User> {
+  
+  getUserByIdObs(id: number): Observable<User> {
     return this.http.get<User>(`${this.url}${this.path}${id}`);
+  }
+
+  async getUserById(id: number): Promise<User> {
+    const res$ = this.http.get<User>(`${this.url}${this.path}${id}`);
+    return await firstValueFrom(res$);
+  }
+
+  createUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.url}${this.path}`, user);
   }
 }

@@ -1,9 +1,8 @@
-import { Component, input, Input, OnInit, Output, output, SimpleChanges } from '@angular/core';
+import { Component, input, OnInit} from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card'; 
 import { CommonModule } from '@angular/common'; 
 import { SearchSharedDataServiceService } from '../services/state/search-shared-data-service.service';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-table',
   imports: [MatTableModule, MatCardModule, CommonModule],
